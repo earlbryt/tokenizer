@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPE Tokenizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Byte Pair Encoding Tokenizer</h1>
+        <div class="description">
+            <p>This tokenizer implements Byte Pair Encoding (BPE) algorithm to compress text into tokens.</p>
+        </div>
+
+        <div class="input-area">
+            <h2>Input Text</h2>
+            <textarea id="inputText" placeholder="Enter text to tokenize..."></textarea>
+            <div class="buttons">
+                <button id="encodeBtn">Encode</button>
+                <button id="clearBtn">Clear</button>
+            </div>
+        </div>
+
+        <div class="result-area">
+            <div class="result-box">
+                <h2>Tokens</h2>
+                <pre id="tokens"></pre>
+                <div class="token-stats">
+                    <span id="tokenCount">0 tokens</span>
+                </div>
+            </div>
+            <div class="result-box">
+                <h2>Decoded Text</h2>
+                <div id="decodedText" class="decoded-text"></div>
+                <div class="match-indicator">
+                    <span id="matchStatus">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-area">
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>Original Size</h3>
+                    <span id="originalSize">0 bytes</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Token Count</h3>
+                    <span id="tokenSize">0 tokens</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Compression Ratio</h3>
+                    <span id="compressionRatio">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
