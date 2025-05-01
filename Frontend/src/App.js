@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { tokenize, checkHealth } from './api';
+import TokenVisualizer from './components/TokenVisualizer';
 
 function App() {
   const [inputText, setInputText] = useState('');
   const [tokens, setTokens] = useState([]);
   const [decodedText, setDecodedText] = useState('');
+  const [tokenMappings, setTokenMappings] = useState([]);
   const [stats, setStats] = useState({
     originalSize: 0,
     tokenCount: 0,
@@ -46,6 +48,7 @@ function App() {
       setTokens(result.tokens);
       setDecodedText(result.decoded);
       setStats(result.stats);
+      setTokenMappings(result.tokenMappings || []);
     } catch (error) {
       console.error('Error encoding text:', error);
       setErrorMessage('Error processing your text. Check that the API server is running.');
@@ -58,6 +61,7 @@ function App() {
     setInputText('');
     setTokens([]);
     setDecodedText('');
+    setTokenMappings([]);
     setStats({
       originalSize: 0,
       tokenCount: 0,
@@ -95,6 +99,15 @@ function App() {
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
+
+      {tokens.length > 0 && (
+        <TokenVisualizer 
+          text={inputText} 
+          tokens={tokens} 
+          decoded={decodedText}
+          tokenMappings={tokenMappings}
+        />
+      )}
 
       <div className="result-area">
         <div className="result-box">

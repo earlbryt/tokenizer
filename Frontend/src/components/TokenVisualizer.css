@@ -1,0 +1,65 @@
+.token-visualizer {
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.token-visualizer h3 {
+  margin-bottom: 15px;
+  color: #3498db;
+}
+
+.token-text-container {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  word-spacing: 1px;
+}
+
+.token {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin: 0 2px;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  min-width: 8px;
+  text-align: center;
+}
+
+/* Make whitespace tokens visible */
+.token:empty::before {
+  content: "·";
+  opacity: 0.3;
+}
+
+/* For very narrow characters */
+.token.narrow-char {
+  min-width: 12px;
+  letter-spacing: 1px;
+}
+
+.token:hover {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.token-legend {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .token-text-container {
+    font-size: 14px;
+  }
+} 
