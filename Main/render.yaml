@@ -1,1 +1,9 @@
- 
+services:
+  - type: web
+    name: bpe-tokenizer-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn 'api:app' --bind=0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 5000
