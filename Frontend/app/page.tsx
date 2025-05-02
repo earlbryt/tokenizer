@@ -111,7 +111,7 @@ export default function TokenizerPage() {
             <div className="flex items-center gap-2">
               <p>
                 {apiAvailable 
-                  ? "If you encounter issues, try refreshing the page."
+                  ? "If you encounter issues, try refreshing the page and wait a moment."
                   : "API server may be in sleep mode. Please wait a moment and try again."}
               </p>
               <button 
