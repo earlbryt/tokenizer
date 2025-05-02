@@ -19,7 +19,4 @@ services:
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          name: bpe-tokenizer-api
-          type: web
-          property: url
+        value: https://bpe-tokenizer-api.onrender.com
