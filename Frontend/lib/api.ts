@@ -3,12 +3,17 @@ import axios from 'axios';
 // Base API URL - configurable for different environments
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
+console.log('API URL:', API_URL); // Debug the actual API URL being used
+
 // Create axios instance with base configuration
 const apiClient = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  // Add timeout and make sure it follows redirects
+  timeout: 10000,
+  withCredentials: false
 });
 
 // Types for API responses

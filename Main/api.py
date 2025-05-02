@@ -4,7 +4,8 @@ from tokenizer import BytePairTokenizer
 import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# Enable CORS for all routes with any origin, credentials allowed
+CORS(app, resources={r"/*": {"origins": "*", "supports_credentials": True}})
 
 # Load the tokenizer
 tokenizer_path = os.path.join(os.path.dirname(__file__), "trained_tokenizer.pkl")
