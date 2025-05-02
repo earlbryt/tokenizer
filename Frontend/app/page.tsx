@@ -1,13 +1,12 @@
 "use client"
 
-import { useState } from "react"
-import { ArrowRight, Code, FileText, Zap } from "lucide-react"
+import { useState, useEffect } from "react"
+import { ArrowRight, Code, FileText, Zap, X, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import TokenVisualizer from "@/components/token-visualizer"
 import { tokenize, checkHealth } from "@/lib/api"
-import { useEffect } from "react"
 
 export default function TokenizerPage() {
   const [inputText, setInputText] = useState("")
@@ -23,6 +22,7 @@ export default function TokenizerPage() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [apiAvailable, setApiAvailable] = useState(false)
+  const [isBannerVisible, setIsBannerVisible] = useState(true)
 
   useEffect(() => {
     // Check if the API is available when the component mounts
@@ -82,8 +82,46 @@ export default function TokenizerPage() {
     setErrorMessage("")
   }
 
+  const refreshApi = async () => {
+    setIsBannerVisible(true)
+    try {
+      const health = await checkHealth()
+      setApiAvailable(health.status === "OK")
+    } catch (error) {
+      console.error("API health check failed:", error)
+      setApiAvailable(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      {isBannerVisible && (
+        <div className="bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-800 py-2 px-4 text-sm text-amber-800 dark:text-amber-300 relative">
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <p>
+                {apiAvailable 
+                  ? "If you encounter issues, try refreshing the page."
+                  : "API server may be in sleep mode. Please wait a moment and try again."}
+              </p>
+              <button 
+                onClick={refreshApi}
+                className="inline-flex items-center text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200"
+                aria-label="Refresh API connection"
+              >
+                <RefreshCw className="h-4 w-4" />
+              </button>
+            </div>
+            <button 
+              onClick={() => setIsBannerVisible(false)} 
+              className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200"
+              aria-label="Close banner"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      )}
       <div className="container mx-auto px-4 py-12">
         <div className="space-y-6 max-w-5xl mx-auto">
           <div className="text-center space-y-4">
