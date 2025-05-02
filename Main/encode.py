@@ -155,7 +155,7 @@ def merge_tokens(ids,pair,idx):
 # print(tokens2)
 # print("Length of tokens2:", len(tokens2))
 
-vocab_size = 290
+vocab_size = 1000
 num_merges = vocab_size - 256
 ids = list(tokens)
 
@@ -280,6 +280,7 @@ if __name__ == "__main__":
     print(f"Encoded: {encoded}")
     print(f"Decoded: {decoded}")
     print(f"Match: {test_text == decoded}")
+    
 
 # To deploy as a module:
 # 1. Move these functions to a separate file like tokenizer.py
