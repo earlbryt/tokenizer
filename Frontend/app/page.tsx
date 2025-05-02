@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Code, FileText, Zap, X, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -23,6 +23,9 @@ export default function TokenizerPage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [apiAvailable, setApiAvailable] = useState(false)
   const [isBannerVisible, setIsBannerVisible] = useState(true)
+  
+  // Add ref for scrolling to visualization
+  const visualizerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Check if the API is available when the component mounts
@@ -60,6 +63,13 @@ export default function TokenizerPage() {
         compressionRatio: result.stats.compressionRatio,
         matches: result.stats.matches
       })
+      
+      // Scroll to visualizer after state updates and rendering
+      setTimeout(() => {
+        if (visualizerRef.current) {
+          visualizerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
     } catch (error) {
       console.error("Error encoding text:", error)
       setErrorMessage("Error processing your text. Check that the API server is running.")
@@ -168,12 +178,14 @@ export default function TokenizerPage() {
           </Card>
 
           {tokens.length > 0 && (
-            <TokenVisualizer 
-              text={inputText} 
-              tokens={tokens} 
-              decoded={decodedText}
-              tokenMappings={tokenMappings}
-            />
+            <div ref={visualizerRef}>
+              <TokenVisualizer 
+                text={inputText} 
+                tokens={tokens} 
+                decoded={decodedText}
+                tokenMappings={tokenMappings}
+              />
+            </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
