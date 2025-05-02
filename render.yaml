@@ -1,0 +1,25 @@
+services:
+  # Backend API service
+  - type: web
+    name: bpe-tokenizer-api
+    env: python
+    rootDir: Main
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn 'api:app' --bind=0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 5000
+
+  # Frontend Next.js application
+  - type: web
+    name: bpe-tokenizer-ui
+    env: node
+    rootDir: Frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: bpe-tokenizer-api
+          type: web
+          property: url

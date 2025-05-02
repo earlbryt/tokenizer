@@ -1,5 +1,1 @@
-{
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://tokenizer-rf6r.onrender.com/api/$1" }
-  ]
-} 
+{} 
