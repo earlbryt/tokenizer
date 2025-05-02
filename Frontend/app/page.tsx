@@ -89,8 +89,7 @@ export default function TokenizerPage() {
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold tracking-tight">Byte Pair Encoding Tokenizer</h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              This tokenizer implements Byte Pair Encoding (BPE) algorithm to compress text into tokens, reducing
-              storage requirements while maintaining information integrity.
+              
             </p>
           </div>
 
