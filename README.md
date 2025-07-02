@@ -54,45 +54,6 @@ npm start
 
 The React app will run on http://localhost:3000
 
-## Deployment
-
-### Backend Deployment
-
-You can deploy the Flask backend on any platform that supports Python applications:
-
-#### Option 1: Deploying on a VPS or Dedicated Server
-
-1. Upload the Main directory to your server
-2. Install requirements: `pip install -r requirements.txt`
-3. Use Gunicorn to run the application:
-   ```bash
-   gunicorn --bind 0.0.0.0:5000 wsgi:app
-   ```
-4. Set up Nginx or Apache as a reverse proxy (recommended)
-
-#### Option 2: Deploying on PythonAnywhere, Heroku, etc.
-
-Follow the platform-specific instructions for deploying a Flask application.
-
-### Frontend Deployment on Vercel
-
-1. Create a Vercel account if you don't have one
-2. Install Vercel CLI: `npm i -g vercel`
-3. Navigate to the Frontend directory
-4. Run `vercel` to deploy (or connect your GitHub repository to Vercel)
-5. Set the environment variable in Vercel project settings:
-   - `REACT_APP_API_URL`: URL of your deployed API
-
-Alternatively, you can deploy directly from GitHub:
-
-1. Push your code to GitHub
-2. Create a new project on Vercel and import your repository
-3. Configure the project:
-   - Framework Preset: Create React App
-   - Build Command: `npm run build`
-   - Output Directory: `build`
-   - Environment Variables: Set `REACT_APP_API_URL` to your API URL
-
 ## API Endpoints
 
 - `POST /api/tokenize`: Tokenize text
